@@ -14,6 +14,10 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import FrontendComponent from './components/FrontendComponent.vue';
 import BackendComponent from './components/BackendComponent.vue';
 import Form from 'vform';
+import {  Button,  HasError,  AlertError,  AlertErrors,  AlertSuccess} from 'vform/src/components/bootstrap5';
+  // 'vform/src/components/bootstrap4'
+  // 'vform/src/components/tailwind'
+
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
 
@@ -85,7 +89,11 @@ app.component('guestmaster', FrontendComponent);
 app.component('authmaster', BackendComponent);
 
 app.component('Multiselect', Multiselect);
-// //  app.component("v-select", vSelect);
+app.component(Button.name, Button);
+app.component(HasError.name, HasError);
+app.component(AlertError.name, AlertError);
+app.component(AlertErrors.name, AlertErrors);
+app.component(AlertSuccess.name, AlertSuccess);
 
 // Vue.mixin
 app.mixin(Roles);

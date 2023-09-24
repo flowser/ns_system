@@ -6,13 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserLoginRequest extends FormRequest {
+class UserPasswordResetRequest extends FormRequest {
     const UNPROCESSABLE_ENTITY = 422;
 
     public function rules() {
         return [
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'      => 'required|email|exists:users',
           ];
     }
 

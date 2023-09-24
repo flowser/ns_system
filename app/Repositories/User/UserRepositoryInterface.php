@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 interface UserRepositoryInterface {
     public function register(Request $request);
-    
+    public function submitPasswordResetForm(Request $request);
+    public function passwordreset(Request $request);
+
     public function createUser(Request $request, $author, $authrole, $authid, $authinstitution, $authinstitutionid, $authroleid);
     public function updateUser(Request $request, $author, $authrole, $authid, $authinstitution, $authinstitutionid, $authroleid, $userid);
 

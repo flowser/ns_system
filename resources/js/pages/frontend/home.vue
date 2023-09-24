@@ -1,10 +1,10 @@
 <template>
     <Banner/>
-    <Impactproducts/>
-    <Companyfacts/>
-    <Partteam/>
-    <Pricingplan/>
-    <Parttestimonials/>
+    <!-- <Impactproducts/> -->
+    <!-- <Companyfacts/> -->
+    <!-- <Partteam/> -->
+    <!-- <Pricingplan/> -->
+    <!-- <Parttestimonials/> -->
     <Actioncall/>
 </template>
 <script>

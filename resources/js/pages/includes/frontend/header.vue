@@ -2,7 +2,8 @@
     <header id="top-header" class="sticky top-0 z-50 bg-black/10 transition duration-300">
                 <div class="container">
                     <div class="flex items-center justify-between py-5 lg:py-0">
-                        <a href="index.html"><img src="assets/themes/plurk/assets/images/logo.png" alt="logo" class="h-10" /></a>
+                        <!-- <a href="index.html"><img src="assets/themes/plurk/assets/images/logo.png" alt="Felix" class="h-10" /></a> -->
+                        <router-link :to="{name: 'Home'}" v-bind:class="{ active: isActive('Home')}" class="text-white">Felix</router-link>
                         <div class="flex items-center">
                             <div onclick="toggleMenu()" class="overlay fixed inset-0 z-[51] hidden bg-black/60"></div>
                             <div class="menus">
@@ -21,24 +22,12 @@
                                     </button>
                                 </div>
                                 <ul>
-                                    <li><router-link :to="{name: 'Home'}" class="active">Home</router-link></li>
+                                    <li><router-link :to="{name: 'Home'}" v-bind:class="{ active: isActive('Home')}">Home</router-link></li>
                                     <li>
-                                        <router-link :to="{name: 'About Us'}">About Us</router-link>
+                                        <router-link :to="{name: 'Contact'}" v-bind:class="{ active: isActive('Contact')}" >Contact Us</router-link>
                                     </li>
                                     <li>
-                                        <router-link :to="{name: 'Products'}">Products</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="{name: 'Portfolio'}">Portfolio</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="{name: 'Team'}">Team</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="{name: 'Contact'}">Contact Us</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="{name: 'Login'}">Login</router-link>
+                                        <router-link :to="{name: 'Login'}" v-bind:class="{ active: isActive('Login')}" >Login</router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -74,6 +63,9 @@ export default {
         },
     },
     methods:{
+        isActive(routeName) {
+          return this.$route.name === routeName;
+        },
         Loadlogo(photo) {
           if (photo) {
             return "/themes/frontend/assets/images/" + photo;

@@ -1,22 +1,20 @@
 <template>
+
     <section class="py-14 dark:bg-gray-dark lg:py-[100px]">
         <div class="container">
             <div class="relative z-10 lg:flex">
                 <div class="heading text-center lg:mb-0 lg:w-1/3 ltr:lg:pr-10 ltr:lg:text-left rtl:lg:pl-10 rtl:lg:text-right">
-                    <h6>Login.</h6>
                     <h4 class="sm:!leading-[50px]">Ready to Login?</h4>
                     <img src="assets/themes/plurk/assets/images/form-img.png" alt="form-img" class="mx-auto"  />
                 </div>
                 <form  @submit.prevent="login()" @keydown="loginform.onKeydown($event)" class="rounded-3xl bg-white px-4 py-12 dark:bg-[#101626] lg:w-2/3 lg:px-8">
+                    <AlertError :form="loginform" class="text-red mb-2"/>
                     <div class="relative mt-10">
-                            <input v-model="loginform.email"
-                                type="email"
-                                name="email"
+                            <input v-model="loginform.email" type="email" name="email"
                                 class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
                             />
                             <div class="text-red" v-if="loginform.errors.has('email')" v-html="loginform.errors.get('email')" />
-                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white"
-                                >Email Address</label
+                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">Email Address</label
                             >
                             <svg
                                 width="22"
@@ -42,14 +40,11 @@
                             </svg>
                         </div>
                     <div class="relative mt-10">
-                        <input  v-model="loginform.password"
-                            type="password"
-                            name="message"
+                        <input  v-model="loginform.password" type="password" name="password"
                             class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
                         />
                         <div class="text-red" v-if="loginform.errors.has('password')" v-html="loginform.errors.get('password')" />
-                        <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white"
-                            >Password</label
+                        <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">Password</label
                         >
                         <svg
                             width="22"
@@ -70,7 +65,8 @@
                             <circle cx="16.05" cy="9.05713" r="1.25" fill="currentColor" />
                         </svg>
                     </div>
-					<router-link :to="{name:'Forgot Password'}" class="ml-auto">Forgot Password?</router-link>
+					<router-link :to="{name:'Forgot Password'}" class="ml-auto text-green">Forgot Password?</router-link> <br>
+					<router-link :to="{name:'Register'}" class="ml-auto text-green">Dont Have Account?</router-link><br>
                     <div class="mt-10 text-center ltr:lg:text-right rtl:lg:text-left">
                         <button  type="submit" :disabled="loginform.busy"
                         class="btn bg-gray px-12 capitalize text-white dark:bg-white dark:text-black dark:hover:bg-secondary">

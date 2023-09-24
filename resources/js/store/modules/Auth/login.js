@@ -1,18 +1,22 @@
 //login
 namespaced: true;
 const state = {
-        access_token     : JSON.parse(localStorage.getItem('access_token')) || null,
-        expires_in       : JSON.parse(localStorage.getItem('expires_in')) || null,
-        refresh_token    : JSON.parse(localStorage.getItem('refresh_token')) || null,
-        token_type       : JSON.parse(localStorage.getItem('token_type')) || null,
+        access_token       : JSON.parse(localStorage.getItem('access_token')) || null,
+        expires_in         : JSON.parse(localStorage.getItem('expires_in')) || null,
+        refresh_token      : JSON.parse(localStorage.getItem('refresh_token')) || null,
+        token_type         : JSON.parse(localStorage.getItem('token_type')) || null,
 
-        user             : JSON.parse(localStorage.getItem('storeduser')) || null,
-        roles            : JSON.parse(localStorage.getItem('storedroles')) || [],
-        permissions      : JSON.parse(localStorage.getItem('storedpermissions')) || [],
-        dashboard        : JSON.parse(localStorage.getItem('storeddashboard')) || null,
+        user               : JSON.parse(localStorage.getItem('storeduser')) || null,
+        passwordresetemail : JSON.parse(localStorage.getItem('passwordresetemail')) || null,
+        roles              : JSON.parse(localStorage.getItem('storedroles')) || [],
+        permissions        : JSON.parse(localStorage.getItem('storedpermissions')) || [],
+        dashboard          : JSON.parse(localStorage.getItem('storeddashboard')) || null,
 
     };
 const getters = {
+        Passwordresetemail(state) {
+            return state.passwordresetemail;
+        },
         Token(state) {
             return state.access_token;
         },
@@ -47,7 +51,7 @@ const actions = {
             payload.post('/api/login')
                 .then(response => {
                     localStorage.clear();
-                    const user             = response.data.user? response.data.user:'';
+                    const user           = response.data.user? response.data.user:'';
                     const roles          = response.data.user.roles? response.data.user.roles:[];
                     const permissions    = response.data.user.permissions? response.data.user.permissions:[];
                     // const businesssettings = response.data.user? response.data.businesssettings:[];
@@ -56,8 +60,6 @@ const actions = {
                         name:'Dashboard',
                         redirecturl:'/auth/dashboard',
                     };
-
-
                     commit('updateToken', response.data.access_token);
                     commit('updateTokenExpiry', response.data.expires_in);
                     commit('updateRefreshToken', response.data.refresh_token);
@@ -95,7 +97,52 @@ const actions = {
         return new Promise((resolve, reject) => {
             payload.patch('/api/register')
                 .then(response => {
-                    commit('updateToken', response.data);
+                    localStorage.clear();
+                    const user           = response.data.user? response.data.user:'';
+                    const roles          = response.data.user.roles? response.data.user.roles:[];
+                    const permissions    = response.data.user.permissions? response.data.user.permissions:[];
+                    // const businesssettings = response.data.user? response.data.businesssettings:[];
+
+                    const Dashboard    = {
+                        name:'Dashboard',
+                        redirecturl:'/auth/dashboard',
+                    };
+                    commit('updateToken', response.data.access_token);
+                    commit('updateTokenExpiry', response.data.expires_in);
+                    commit('updateRefreshToken', response.data.refresh_token);
+                    commit('updateTokenType', response.data.token_type);
+
+                    commit('updateUser', user);
+                    commit('updateRoles', roles);
+                    commit('updatePermissions', permissions);
+
+                    // commit('businesssettings', businesssettings, { root: true });
+                    commit('updateDashboard', Dashboard);
+                    resolve (response);
+                })
+                .catch(error => {
+                    localStorage.clear();
+                    reject(error);
+                });
+        });
+    },
+    resetpasswordform({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            payload.patch('/api/login/password/reset/form')
+                .then(response => {;
+                    commit('updatepasswordresetemail', response.data.email);
+                    resolve(response)
+                })
+                .catch(error => {
+                    localStorage.clear();
+                    reject(error);
+                });
+        });
+    },
+    passwordreset({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            payload.patch('/api/login/password/reset/' + payload.token)
+                .then(response => {;
                     resolve(response)
                 })
                 .catch(error => {
@@ -153,6 +200,10 @@ const actions = {
     },
 };
 const mutations = {
+    updatepasswordresetemail: (state, passwordresetemail) => {
+        localStorage.setItem('passwordresetemail', JSON.stringify(passwordresetemail));
+        return state.passwordresetemail  = JSON.parse(localStorage.getItem('passwordresetemail'));
+    },
     updateToken: (state, access_token) => {
         localStorage.setItem('access_token', JSON.stringify(access_token));
         return state.access_token  = JSON.parse(localStorage.getItem('access_token'));

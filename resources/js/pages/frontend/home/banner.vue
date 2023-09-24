@@ -11,7 +11,7 @@
                                         Make your <span class="italic text-primary">team</span> <span class="italic text-secondary">work</span> together
                                     </h2>
                                     <p class="my-8 text-lg lg:w-[90%]">
-                                        In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.
+                                        In publishing and graphic design, Lets Dream Big and Make it Happen Closer than You could think.
                                     </p>
                                     <a href="about-us.html" class="btn mx-auto mt-2 block w-fit bg-white lg:mx-0 lg:rtl:ml-auto">read more</a>
                                 </div>
@@ -33,7 +33,7 @@
                                         Testing <span class="italic text-primary">My</span> <span class="italic text-secondary">Dream</span> together
                                     </h2>
                                     <p class="my-8 text-lg lg:w-[90%]">
-                                        samples
+                                        The Dreams
                                     </p>
                                     <a href="about-us.html" class="btn mx-auto mt-2 block w-fit bg-white lg:mx-0 lg:rtl:ml-auto">read more</a>
                                 </div>

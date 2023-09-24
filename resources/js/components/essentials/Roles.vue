@@ -33,41 +33,7 @@ export default {
     },
     $dashboard(){
         if(this.$authcheck()){
-            if(this.$hasrole('Superadmin','Admin')){
-                this.$store.dispatch('urlUpdate', 'system');
-                this.$store.dispatch('urlroleUpdate', 'system');
-               return this.$store.getters.AuthDashboard;
-            }
-            if(this.$hasrole(['Institution Superadmin', 'Institution Admin'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'institution');
-                return this.$store.getters.AuthDashboard;
-            }
-            if(this.$hasrole(['Investigator'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'investigator');
-                return this.$store.getters.AuthDashboard;
-            }
-            if(this.$hasrole(['Supervisor'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'supervisor');
-                return this.$store.getters.AuthDashboard;
-            };
-            if(this.$hasrole(['Team Leader'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'teamleader');
-                return this.$store.getters.AuthDashboard;
-            };
-            if(this.$hasrole(['Surveyor'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'surveyor');
-                return this.$store.getters.AuthDashboard;
-            };
-            if(this.$hasrole(['Participant'])){
-                this.$store.dispatch('urlUpdate', 'institution');
-                this.$store.dispatch('urlroleUpdate', 'participant');
-                return this.$store.getters.AuthDashboard;
-            };
+            return this.$store.getters.AuthDashboard;
         }else{
             window.location.replace('/');
         }

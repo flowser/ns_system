@@ -16,14 +16,11 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/login/password/resetlink', [AuthController::class, 'resetlink']);
-Route::post('/login/password/reset', [AuthController::class, 'reset']);
-
-Route::post('/login/password/resetlink', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm']);
-Route::post('/password/reset', [ResetPasswordController::class, 'reset']);
+Route::patch('/login/password/reset/form', [AuthController::class, 'passwordresetform']);
+Route::patch('/login/password/reset/{token}', [AuthController::class, 'passwordreset']);
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::patch('/register', [AuthController::class, 'register']);
 
 Route::post('/refreshtoken', [AuthController::class, 'refreshtoken'], function(){
     return response()->json(['success' => true]);

@@ -3,10 +3,10 @@
         <div class="container">
             <div class="flex flex-col items-center justify-between text-center font-bold dark:text-white md:flex-row">
                 <div>
-                    Copyright© <span class="curr-year">2022 </span>
-                        <router-link :to="{name: 'Home'}" class="text-primary transition hover:text-secondary"> HillMan Paints. Ltd. </router-link>
+                    Copyright© <span class="curr-year">2023 </span>
+                        <router-link :to="{name: 'Home'}" class="text-primary transition hover:text-secondary"> Testing My Dream. Ltd. </router-link>
                         All rights reserved.  <span class="curr-year">Developed by  </span>
-                        <a href="http://www.savvytexmarines.co.ke" class="text-primary transition hover:text-secondary" target="_blank"> Graphic Marines</a>
+                        <a href="http://www.savvytexmarines.co.ke" class="text-primary transition hover:text-secondary" target="_blank"> Eng Felix Nyachio</a>
 
                 </div>
                 <div>Need help? Visit the <router-link :to="{name: 'Contact'}" class="text-secondary transition hover:text-primary">Contact Us</router-link></div>

@@ -12,6 +12,8 @@ import Contact from './pages/frontend/contact.vue';
 import Login from './pages/frontend//auth/login.vue';
 import Register from './pages/frontend//auth/register.vue';
 import ForgotPassword from './pages/frontend//auth/forgotpassword.vue';
+import ForgotPasswordResponse from './pages/frontend//auth/forgotpasswordresponse.vue';
+import PasswordResetLink from './pages/frontend//auth/passwordresetlink.vue';
 
 // authenticated
 import Dashboard from './pages/backend/dashboard.vue';
@@ -203,6 +205,36 @@ const routes = [
             image:'empty',
             keywords:'empty',
             info: 'Reset Your Password Here',
+        }
+    },
+    {
+        path: '/forgotpassword/response',
+        name: 'Forgot Password Response',
+        component: ForgotPasswordResponse,
+        meta: {
+            requiresAuth: false,
+            title:'empty',
+            description:'empty',
+            image:'empty',
+            keywords:'empty',
+            info: 'Check Your Email For password Reset Link',
+        }
+    },
+    {
+        path: '/forgotpassword/reset/link/:id/:token',
+        name: 'Password Reset Link',
+        component: PasswordResetLink,
+        params:{
+            id:'',
+            token:'',
+        },
+        meta: {
+            requiresAuth: false,
+            title:'empty',
+            description:'empty',
+            image:'empty',
+            keywords:'empty',
+            info: 'Password Reset Link',
         }
     },
     // authenticated

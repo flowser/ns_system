@@ -76,30 +76,30 @@
                 <div>
                     <ul class="flex flex-col gap-3 font-bold">
                         <li class="mb-3 text-lg font-extrabold text-black dark:text-white">Quick Menu</li>
-                        <li><a href="index.html" class="inline-block transition hover:scale-110 hover:text-secondary">Home</a></li>
-                        <li><a href="portfolio.html" class="inline-block transition hover:scale-110 hover:text-secondary">Portfolio</a></li>
-                        <li><a href="services.html" class="inline-block transition hover:scale-110 hover:text-secondary">Service</a></li>
-                        <li><a href="team.html" class="inline-block transition hover:scale-110 hover:text-secondary">Team</a></li>
-                        <li><a href="about-us.html" class="inline-block transition hover:scale-110 hover:text-secondary">About Us</a></li>
-                        <li><a href="career.html" class="inline-block transition hover:scale-110 hover:text-secondary">Career</a></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Home</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Portfolio</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Service</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Team</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">About Us</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Career</router-link></li>
                     </ul>
                 </div>
                 <div>
                     <ul class="flex flex-col gap-3 font-bold">
                         <li class="mb-3 text-lg font-extrabold text-black dark:text-white">Services</li>
                         <li>
-                            <a href="services-detail.html" class="inline-block transition hover:scale-110 hover:text-secondary">UI/UX Design</a>
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">UI/UX Design</router-link>
                         </li>
                         <li>
-                            <a href="services-detail.html" class="inline-block transition hover:scale-110 hover:text-secondary">Web Development</a>
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Web Development</router-link>
                         </li>
                         <li>
-                            <a href="services-detail.html" class="inline-block transition hover:scale-110 hover:text-secondary"
-                                >Digital Marketing</a
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary"
+                                >Digital Marketing</router-link
                             >
                         </li>
                         <li>
-                            <a href="services-detail.html" class="inline-block transition hover:scale-110 hover:text-secondary">App Development</a>
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">App Development</router-link>
                         </li>
                     </ul>
                 </div>
@@ -107,23 +107,22 @@
                     <ul class="flex flex-col gap-3 font-bold">
                         <li class="mb-3 text-lg font-extrabold text-black dark:text-white">Legal</li>
                         <li>
-                            <a href="terms-conditions.html" class="inline-block transition hover:scale-110 hover:text-secondary"
-                                >Terms & Conditions</a
-                            >
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary"
+                                >Terms & Conditions</router-link>
                         </li>
                         <li>
-                            <a href="privacy-policy.html" class="inline-block transition hover:scale-110 hover:text-secondary">Privacy Policy</a>
+                            <router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">Privacy Policy</router-link>
                         </li>
-                        <li><a href="faq.html" class="inline-block transition hover:scale-110 hover:text-secondary">FAQs</a></li>
-                        <li><a href="blog.html" class="inline-block transition hover:scale-110 hover:text-secondary">Blog</a></li>
+                        <li><router-link :to="{name: 'Home'}" class="inline-block transition hover:scale-110 hover:text-secondary">FAQs</router-link></li>
+                        <li><router-link :to="{name: 'Home'}" v-bind:class="{ active: isActive('Home')}" class="inline-block transition hover:scale-110 hover:text-secondary">Blog</router-link></li>
                     </ul>
                 </div>
                 <div>
                     <ul class="flex flex-col gap-3 font-bold">
                         <li class="mb-3 text-lg font-extrabold text-black dark:text-white">Information</li>
-                        <li>164 Brighton Ave, Allston, Maine, U.S. - 02134</li>
+                        <li>047, Donholm, Nairobi, Kenya. - 00200</li>
                         <li>
-                            <a href="tel:+(617) 254-2333" class="inline-block transition hover:scale-110 hover:text-secondary">+(617) 254-2333</a>
+                            <a href="tel:+(254) 714 192 492" class="inline-block transition hover:scale-110 hover:text-secondary">+(254) 714 192 492</a>
                         </li>
                     </ul>
                 </div>
@@ -157,6 +156,9 @@ export default {
         },
     },
     methods:{
+         isActive(routeName) {
+          return this.$route.name === routeName;
+        },
         Loadlogo(photo) {
           if (photo) {
             return "/themes/frontend/assets/images/" + photo;

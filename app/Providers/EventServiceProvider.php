@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\PasswordReset;
+use App\Listeners\SendNewUserNotification;
+use App\Listeners\SendNewUserRegistration;
+use App\Listeners\SendPasswordResetNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,7 +21,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            SendNewUserNotification::class, //notify the admin regarding hte new user registration
+            SendNewUserRegistration::class, //notify the user regarding his successfull registration
         ],
+        PasswordReset::class => [
+            SendPasswordResetNotification::class,
+        ]
     ];
 
     /**
