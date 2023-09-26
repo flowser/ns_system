@@ -16,6 +16,7 @@
                              />
                             <div class="text-red" v-if="registerform.errors.has('first_name')" v-html="registerform.errors.get('first_name')" />
                             <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">First Name</label>
+
                         </div>
                         <div class="relative">
                             <input v-model="registerform.last_name" type="text" name="last_name"
@@ -30,6 +31,7 @@
                             </vue-tel-input>
                             <div class="text-red" v-if="registerform.errors.has('phone')" v-html="registerform.errors.get('phone')" />
                             <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">Mobile Number</label>
+
                         </div>
                         <div class="relative">
                             <input v-model="registerform.email" type="email" name="email"
@@ -37,6 +39,7 @@
                              />
                             <div class="text-red" v-if="registerform.errors.has('email')" v-html="registerform.errors.get('email')" />
                             <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white" >Email Address</label>
+
                         </div>
                         <div class="relative">
                             <input  v-model="registerform.password" type="password" name="password"

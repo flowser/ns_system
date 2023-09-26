@@ -4,7 +4,6 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <Authuser/>
-      <Sidebarsearch/>
       <Sidebarmenu/>
       <!-- /.sidebar-menu -->
     </div>

@@ -1,19 +1,14 @@
 <template>
-    <!-- SidebarSearch Form -->
-    <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+            <router-link :to="$dashboard()" class="d-block">{{this.$authuser().full_name}}</router-link>
+        </div>
+      </div>
     </template>
         <script>
         export default {
-            name:'backendsidebarsearch',
+            name:'backendsidebaruser',
             components:{
             },
             data(){
@@ -21,7 +16,7 @@
                 };
             },
             mounted() {
-    
+
             },
             computed:{
                 Company(){
@@ -40,8 +35,7 @@
             }
         }
         </script>
-    
+
         <style>
-    
+
         </style>
-    

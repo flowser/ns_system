@@ -16,12 +16,6 @@ class User extends Authenticatable
     use HasApiTokens, HasRoles, HasFactory, Notifiable;
 
     protected $guard_name = 'api';
-    // protected $keyType = 'string';
-    // protected $primaryKey = 'id';
-    // protected $primaryKey = 'uuid';
-    // public $incrementing = false;
-
-
 
     protected $fillable = [
             'first_name',
@@ -59,6 +53,15 @@ class User extends Authenticatable
         public function getNameAttribute()
         {
             return $this->full_name;
+        }
+
+        public function sentmessages()
+        {
+            return $this->hasMany(Message::class, 'sender_id');
+        }
+        public function receivedmessages()
+        {
+            return $this->hasMany(Message::class, 'recipient_id');
         }
 
 }

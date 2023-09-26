@@ -1,10 +1,9 @@
 <template>
-    <Breadcrumb/>
-    <section class="bg-gradient-to-t from-white/[55%] to-transparent py-2 dark:bg-none lg:py-[0px]">
+    <section class="bg-gradient-to-t from-white/[55%] to-transparent py-2 dark:bg-none lg:py-[100px]">
         <div class="container">
             <div class="relative z-10 lg:flex">
                 <div class="heading text-center ltr:lg:text-left rtl:lg:text-right">
-                    <h4 class="sm:!leading-[50px]">Get in touch with us</h4>
+                    <h4 class="sm:!leading-[50px]">Ready to Send us Message?</h4>
                     <ul class="mt-8 flex items-center justify-center gap-4 lg:justify-start" data-aos="fade-up" data-aos-duration="500">
                         <li class="h-[45px] w-[45px] md:h-[60px] md:w-[60px]">
                             <a href="javascript:" class="group">
@@ -159,475 +158,114 @@
                         </li>
                     </ul>
                 </div>
-                <form action="" class="rounded-3xl bg-white px-4 py-12 dark:bg-gray-dark lg:w-2/3 lg:px-8">
+                <form  @submit.prevent="addMessage()" @keydown="messageform.onKeydown($event)" class="rounded-3xl bg-white px-4 py-12 dark:bg-gray-dark lg:w-2/3 lg:px-8">
                     <div class="grid gap-10 sm:grid-cols-2">
                         <div class="relative">
-                            <input
-                                type="text"
-                                name="name"
-                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
-                            />
-                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white"
-                                >Full Name</label
-                            >
-                            <svg
-                                width="20"
-                                height="22"
-                                viewBox="0 0 20 22"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 dark:text-white"
-                            >
-                                <path
-                                    d="M5.42855 5.57875C5.42855 8.10348 7.47525 10.1502 9.99998 10.1502C12.5247 10.1502 14.5714 8.10348 14.5714 5.57875C14.5714 3.05402 12.5247 1.00732 9.99998 1.00732"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                />
-                                <path
-                                    d="M2 16.9328C2 15.9495 2.61812 15.0724 3.5441 14.7417V14.7417C7.71891 13.2507 12.2811 13.2507 16.4559 14.7417V14.7417C17.3819 15.0724 18 15.9495 18 16.9328V18.7014C18 19.9185 16.922 20.8535 15.7172 20.6813L13.8184 20.4101C11.2856 20.0483 8.71435 20.0483 6.18162 20.4101L4.28284 20.6813C3.07798 20.8535 2 19.9185 2 18.7014V16.9328Z"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                />
-                            </svg>
+                            <input v-model="messageform.first_name" type="text" name="first_name"
+                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"/>
+                            <div class="text-red" v-if="messageform.errors.has('first_name')" v-html="messageform.errors.get('first_name')" />
+                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">First Name</label>
                         </div>
                         <div class="relative">
-                            <input
-                                type="email"
-                                name="email"
-                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
-                            />
-                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white"
-                                >Email Address</label
-                            >
-                            <svg
-                                width="22"
-                                height="21"
-                                viewBox="0 0 22 21"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 dark:text-white"
-                            >
-                                <path
-                                    d="M1 8.00732V7.00732C1 4.2459 3.23858 2.00732 6 2.00732H16C18.7614 2.00732 21 4.2459 21 7.00732V13.0073C21 15.7687 18.7614 18.0073 16 18.0073H6C3.23858 18.0073 1 15.7687 1 13.0073V12.0073"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                />
-                                <path
-                                    d="M5 7.00732L9.8 10.6073C10.5111 11.1407 11.4889 11.1407 12.2 10.6073L17 7.00732"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
+                            <input v-model="messageform.last_name" type="text" name="last_name"
+                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"/>
+                            <div class="text-red" v-if="messageform.errors.has('last_name')" v-html="messageform.errors.get('last_name')" />
+                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">Last Name</label>
                         </div>
                         <div class="relative">
-                            <input
-                                type="text"
-                                name="mobile"
-                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
-                            />
-                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white"
-                                >Mobile Number</label
-                            >
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 22 22"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 dark:text-white"
-                            >
-                                <path
-                                    d="M6.45241 1.40806C5.45292 0.783702 4.14202 0.887138 3.2983 1.73086L1.86856 3.1606C-0.302899 5.33207 1.73747 10.8931 6.42586 15.5815C11.1142 20.2699 16.6753 22.3102 18.8467 20.1388L20.2765 18.709C21.2635 17.722 21.2374 16.0956 20.2182 15.0764L18.0036 12.8619C16.9844 11.8426 15.358 11.8165 14.371 12.8036L14.0639 13.1107C13.531 13.6436 12.6713 13.6957 12.0713 13.2005C11.4925 12.7229 10.9159 12.208 10.3576 11.6497C9.79933 11.0914 9.28441 10.5149 8.80678 9.93607C8.31161 9.33601 8.36374 8.47631 8.89666 7.9434L9.20375 7.63631C9.98187 6.85819 10.1303 5.68271 9.65898 4.72062"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
+                            <input v-model="messageform.email" type="email" name="email"
+                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"/>
+                            <div class="text-red" v-if="messageform.errors.has('email')" v-html="messageform.errors.get('email')" />
+                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white" >Email Address</label>
                         </div>
                         <div class="relative">
-                            <input
-                                type="text"
-                                name="city"
-                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
-                            />
-                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white"
-                                >City</label
-                            >
-                            <svg
-                                width="20"
-                                height="22"
-                                viewBox="0 0 20 22"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 dark:text-white"
-                            >
-                                <path
-                                    d="M5.89416 2.31259C7.20149 1.48625 8.75475 1.00732 10.4211 1.00732C15.0719 1.00732 18.8421 4.73828 18.8421 9.34066C18.8421 15.0541 12.1053 21.0073 10.4211 21.0073C8.73684 21.0073 2 15.0541 2 9.34066C2 7.87581 2.38193 6.49924 3.05263 5.30315"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                />
-                                <path
-                                    d="M13.4571 9.77392C13.5365 9.49702 13.579 9.20456 13.579 8.90216C13.579 7.15811 12.1651 5.74427 10.4211 5.74427C8.67702 5.74427 7.26318 7.15811 7.26318 8.90216C7.26318 10.6462 8.67702 12.0601 10.4211 12.0601C10.6633 12.0601 10.8991 12.0328 11.1256 11.9812"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
+                            <vue-tel-input v-model="messageform.phone" name="phone"
+                                class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12" >
+                            </vue-tel-input>
+                            <div class="text-red" v-if="messageform.errors.has('phone')" v-html="messageform.errors.get('phone')" />
+                            <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-[#101626] dark:text-white">Mobile Number</label>
                         </div>
                     </div>
                     <div class="relative mt-10">
-                        <input
-                            type="text"
-                            name="message"
-                            class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"
-                        />
-                        <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white"
-                            >Message</label
-                        >
-                        <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 22 22"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 dark:text-white"
-                        >
-                            <path
-                                d="M1 11.467V18.9267C1 19.7652 1.96993 20.2314 2.6247 19.7076L5.45217 17.4456C5.8068 17.1619 6.24742 17.0073 6.70156 17.0073H16C18.7614 17.0073 21 14.7687 21 12.0073V6.00732C21 3.2459 18.7614 1.00732 16 1.00732H6C3.23858 1.00732 1 3.2459 1 6.00732V7.62225"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                            />
-                            <circle cx="6.05005" cy="9.05713" r="1.25" fill="currentColor" />
-                            <circle cx="11.05" cy="9.05713" r="1.25" fill="currentColor" />
-                            <circle cx="16.05" cy="9.05713" r="1.25" fill="currentColor" />
-                        </svg>
+                        <input v-model="messageform.message" type="text" name="message"
+                            class="w-full rounded-2xl border-2 border-gray/20 bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12"/>
+                        <div class="text-red" v-if="messageform.errors.has('phone')" v-html="messageform.errors.get('phone')" />
+                        <label for="" class="absolute -top-3 bg-white px-2 font-bold ltr:left-6 rtl:right-6 dark:bg-gray-dark dark:text-white">Message</label>
                     </div>
                     <div class="mt-10 text-center ltr:lg:text-right rtl:lg:text-left">
-                        <button type="button" class="btn bg-gray px-12 capitalize text-white dark:bg-white dark:text-black dark:hover:bg-secondary">
-                            Submit
+                        <button type="submit" :disabled="messageform.busy"
+                            class="btn bg-gray px-12 capitalize text-white dark:bg-white dark:text-black dark:hover:bg-secondary">
+                            Send
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <section class="py-2 lg:py-[0]">
-        <div class="container">
-            <div class="heading text-center ltr:lg:text-left rtl:lg:text-right">
-                <h4 class="sm:!leading-[50px]">Donholm</h4>
-            </div>
-            <div class="mb-10 grid gap-[30px] md:grid-cols-2 lg:grid-cols-3">
-                <div class="rounded-[32px] bg-white px-4 py-6 dark:bg-gray-dark md:p-7" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="mb-4 flex items-center gap-2 text-secondary">
-                        <div>
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_563_8253)">
-                                    <path
-                                        d="M22.75 17.7883V21.619C22.7501 21.8933 22.6462 22.1574 22.4592 22.358C22.2722 22.5587 22.0161 22.681 21.7425 22.7002C21.2691 22.7327 20.8823 22.75 20.5833 22.75C11.0099 22.75 3.25 14.9901 3.25 5.41667C3.25 5.11767 3.26625 4.73092 3.29983 4.2575C3.31903 3.9839 3.4413 3.72776 3.64195 3.54078C3.84261 3.35379 4.10672 3.24988 4.381 3.25H8.21167C8.34604 3.24986 8.47567 3.29968 8.57537 3.38977C8.67507 3.47986 8.73773 3.6038 8.75117 3.7375C8.77608 3.98667 8.79883 4.18492 8.8205 4.3355C9.0358 5.838 9.477 7.29932 10.1292 8.66992C10.2321 8.88658 10.1649 9.1455 9.96992 9.28417L7.63208 10.9547C9.06149 14.2853 11.7158 16.9396 15.0464 18.369L16.7148 16.0355C16.7829 15.9402 16.8824 15.8718 16.9959 15.8423C17.1093 15.8128 17.2295 15.824 17.3355 15.8741C18.7059 16.525 20.1669 16.9651 21.6688 17.1795C21.8194 17.2012 22.0177 17.225 22.2647 17.2488C22.3982 17.2625 22.5218 17.3253 22.6117 17.425C22.7016 17.5246 22.7512 17.6541 22.7511 17.7883H22.75Z"
-                                        fill="currentColor"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_563_8253">
-                                        <rect width="26" height="26" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="text-[22px] font-bold">Call us</span>
-                    </div>
-                    <a
-                        href="tel:(480) 555-0103"
-                        class="font-bold text-black transition hover:text-secondary dark:text-white dark:hover:text-secondary lg:text-lg"
-                        >(480) 555-0103</a
-                    >
-                </div>
-                <div class="rounded-[32px] bg-white px-4 py-6 dark:bg-gray-dark md:p-7" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="mb-4 flex items-center gap-2 text-primary">
-                        <div>
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_563_8262)">
-                                    <path
-                                        d="M3.24996 3.25H22.75C23.0373 3.25 23.3128 3.36414 23.516 3.5673C23.7192 3.77047 23.8333 4.04602 23.8333 4.33333V21.6667C23.8333 21.954 23.7192 22.2295 23.516 22.4327C23.3128 22.6359 23.0373 22.75 22.75 22.75H3.24996C2.96264 22.75 2.68709 22.6359 2.48393 22.4327C2.28076 22.2295 2.16663 21.954 2.16663 21.6667V4.33333C2.16663 4.04602 2.28076 3.77047 2.48393 3.5673C2.68709 3.36414 2.96264 3.25 3.24996 3.25ZM13.065 12.6566L6.11863 6.75783L4.71571 8.40883L13.079 15.5101L21.2918 8.40342L19.8748 6.76433L13.066 12.6566H13.065Z"
-                                        fill="currentColor"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_563_8262">
-                                        <rect width="26" height="26" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="text-[22px] font-bold">Mail us</span>
-                    </div>
-                    <a
-                        href="mailto:michelle.rivera@example.com"
-                        class="font-bold text-black transition hover:text-primary dark:text-white dark:hover:text-primary lg:text-lg"
-                        >michelle.rivera@example.com</a
-                    >
-                </div>
-                <div class="rounded-[32px] bg-white px-4 py-6 dark:bg-gray-dark md:p-7" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="mb-4 flex items-center gap-2 text-secondary">
-                        <div>
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_563_8282)">
-                                    <path
-                                        d="M19.8943 18.8122L13 25.7066L6.10567 18.8122C4.74212 17.4486 3.81354 15.7114 3.43734 13.8201C3.06114 11.9287 3.25423 9.96835 3.99219 8.18678C4.73015 6.4052 5.97983 4.88247 7.58321 3.81113C9.18658 2.73979 11.0716 2.16797 13 2.16797C14.9284 2.16797 16.8134 2.73979 18.4168 3.81113C20.0202 4.88247 21.2699 6.4052 22.0078 8.18678C22.7458 9.96835 22.9389 11.9287 22.5627 13.8201C22.1865 15.7114 21.2579 17.4486 19.8943 18.8122ZM13 14.0845C13.5746 14.0845 14.1257 13.8563 14.5321 13.4499C14.9384 13.0436 15.1667 12.4925 15.1667 11.9179C15.1667 11.3432 14.9384 10.7921 14.5321 10.3858C14.1257 9.97949 13.5746 9.75122 13 9.75122C12.4254 9.75122 11.8743 9.97949 11.4679 10.3858C11.0616 10.7921 10.8333 11.3432 10.8333 11.9179C10.8333 12.4925 11.0616 13.0436 11.4679 13.4499C11.8743 13.8563 12.4254 14.0845 13 14.0845Z"
-                                        fill="currentColor"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_563_8282">
-                                        <rect width="26" height="26" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="text-[22px] font-bold">Location</span>
-                    </div>
-                    <h5 class="font-bold text-black dark:text-white lg:text-lg">Ontario, Canada</h5>
-                </div>
-            </div>
-            <img :src="Loadimage('canada-branch.png')" alt="canada-branch" class="w-full" />
-        </div>
-    </section>
-    <section class="bg-gradient-to-b from-white/[54%] to-transparent py-14 dark:bg-none lg:py-[100px]">
-        <div class="container">
-            <div class="flex flex-col items-center justify-center lg:flex-row lg:justify-between">
-                <div class="heading text-center md:w-1/2 ltr:lg:text-left rtl:lg:text-right">
-                    <h6>Our Offices</h6>
-                    <h4>Come to visit our offices throughout the globe</h4>
-                </div>
-                <div class="flex items-center justify-end gap-4">
-                    <a
-                        href="javascript:"
-                        class="text-sm font-extrabold text-black transition hover:text-secondary dark:text-white dark:hover:text-secondary"
-                        >View All</a
-                    >
-                    <button
-                        type="button"
-                        class="ofc-slider-button-prev flex h-10 w-10 items-center justify-center rounded-full bg-black/5 transition hover:bg-secondary dark:bg-white/5 dark:hover:bg-secondary"
-                    >
-                        <svg
-                            width="7"
-                            height="12"
-                            viewBox="0 0 7 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="text-black rtl:rotate-180 dark:text-white"
-                        >
-                            <path
-                                d="M5.95007 1.2002L1.48924 5.3424C1.06317 5.73803 1.06317 6.41236 1.48924 6.80799L5.95007 10.9502"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            ></path>
-                        </svg>
-                    </button>
-                    <button
-                        type="button"
-                        class="ofc-slider-button-next text-p flex h-10 w-10 items-center justify-center rounded-full bg-black/5 transition hover:bg-secondary dark:bg-white/5 dark:hover:bg-secondary"
-                    >
-                        <svg
-                            width="7"
-                            height="12"
-                            viewBox="0 0 7 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="text-black rtl:rotate-180 dark:text-white"
-                        >
-                            <path
-                                d="M1.05005 10.7998L5.51089 6.6576C5.93695 6.26197 5.93695 5.58764 5.51089 5.19201L1.05005 1.0498"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="swiper ofc-slider rounded-[32px] drop-shadow-[5px_10px_80px_rgba(119,128,161,0.15)] dark:drop-shadow-none">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="mt-10 rounded-[32px] bg-white dark:bg-gray-dark md:grid md:grid-cols-2 lg:mt-0">
-                            <img
-                                :src="Loadimage('ofc.png')"
-                                alt="office"
-                                class="h-full w-full rounded-r-[32px] rounded-l-[32px] object-cover md:rounded-r-none"
-                            />
-                            <div class="py-10 px-5 sm:px-8">
-                                <div>
-                                    <svg width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_267_1200)">
-                                            <path
-                                                d="M0 0H10L10.4125 0.4125H29.5875L30 0H40V20H30L29.5875 19.5875H10.4125L10 20H0V0Z"
-                                                fill="#FF0000"
-                                            />
-                                            <path
-                                                d="M10 0H30V20H10V0ZM20.375 18.4583L20.1875 14.8625C20.1848 14.8034 20.1953 14.7444 20.2184 14.6899C20.2415 14.6354 20.2766 14.5867 20.3209 14.5475C20.3653 14.5084 20.4179 14.4796 20.4749 14.4635C20.5318 14.4473 20.5917 14.4441 20.65 14.4542L24.2292 15.0833L23.7458 13.75C23.7262 13.6969 23.7237 13.6391 23.7387 13.5845C23.7536 13.53 23.7853 13.4815 23.8292 13.4458L27.75 10.2708L26.8667 9.85833C26.807 9.83014 26.7597 9.78114 26.7336 9.72053C26.7075 9.65992 26.7045 9.59187 26.725 9.52917L27.5 7.14583L25.2417 7.625C25.1805 7.63776 25.1168 7.62896 25.0613 7.6001C25.0059 7.57124 24.9621 7.5241 24.9375 7.46667L24.5 6.4375L22.7375 8.32917C22.6972 8.37167 22.6442 8.39997 22.5865 8.40981C22.5287 8.41965 22.4693 8.41051 22.4172 8.38375C22.3651 8.357 22.3231 8.31407 22.2975 8.26141C22.2718 8.20874 22.2639 8.14919 22.275 8.09167L23.125 3.70833L21.7625 4.49583C21.7305 4.51458 21.695 4.52656 21.6582 4.53103C21.6214 4.5355 21.5841 4.53237 21.5485 4.52182C21.513 4.51127 21.48 4.49354 21.4516 4.46972C21.4231 4.4459 21.3999 4.41649 21.3833 4.38333L20 1.66667L18.6167 4.38333C18.6001 4.41649 18.5769 4.4459 18.5484 4.46972C18.52 4.49354 18.487 4.51127 18.4515 4.52182C18.4159 4.53237 18.3786 4.5355 18.3418 4.53103C18.305 4.52656 18.2695 4.51458 18.2375 4.49583L16.875 3.70833L17.725 8.09167C17.7361 8.14919 17.7282 8.20874 17.7025 8.26141C17.6769 8.31407 17.6349 8.357 17.5828 8.38375C17.5307 8.41051 17.4713 8.41965 17.4135 8.40981C17.3558 8.39997 17.3028 8.37167 17.2625 8.32917L15.5 6.4375L15.0625 7.46667C15.0379 7.5241 14.9941 7.57124 14.9387 7.6001C14.8832 7.62896 14.8195 7.63776 14.7583 7.625L12.5 7.14583L13.275 9.52917C13.2955 9.59187 13.2925 9.65992 13.2664 9.72053C13.2403 9.78114 13.193 9.83014 13.1333 9.85833L12.25 10.2708L16.1708 13.4458C16.2147 13.4815 16.2464 13.53 16.2613 13.5845C16.2763 13.6391 16.2738 13.6969 16.2542 13.75L15.7708 15.0833L19.35 14.4542C19.4083 14.4441 19.4682 14.4473 19.5251 14.4635C19.5821 14.4796 19.6347 14.5084 19.6791 14.5475C19.7234 14.5867 19.7585 14.6354 19.7816 14.6899C19.8047 14.7444 19.8152 14.8034 19.8125 14.8625L19.625 18.4583H20.375Z"
-                                                fill="white"
-                                            />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_267_1200">
-                                                <rect width="40" height="20" rx="2" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <ul class="space-y-4 pt-10">
-                                    <li class="flex gap-3">
-                                        <div class="pt-1">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M1 8.45529C1 3.77836 4.8292 0 9.53659 0C14.244 0 18.0732 3.77836 18.0732 8.45529C18.0732 11.3641 16.3769 14.235 14.5791 16.3248C13.6693 17.3823 12.7037 18.2751 11.852 18.9101C11.4268 19.227 11.0181 19.4886 10.6492 19.6744C10.3034 19.8485 9.90853 20 9.53659 20C9.16464 20 8.76974 19.8485 8.42394 19.6744C8.05506 19.4886 7.6464 19.227 7.22121 18.9101C6.36948 18.2751 5.40386 17.3823 4.49409 16.3248C2.69631 14.235 1 11.3641 1 8.45529ZM9.53661 10.9748C7.92017 10.9748 6.60978 9.66437 6.60978 8.04792C6.60978 6.43148 7.92017 5.12109 9.53661 5.12109C11.1531 5.12109 12.4634 6.43148 12.4634 8.04792C12.4634 9.66437 11.1531 10.9748 9.53661 10.9748Z"
-                                                    fill="#FFBD11"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div class="text-sm font-bold sm:text-lg">151 Yonge Street, 11th Floor, Toronto, Ontario, Canada</div>
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <div>
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17.0621 18.2183C15.1077 20.1726 10.1028 18.3363 5.88327 14.1167C1.66372 9.89718 -0.172609 4.89227 1.7817 2.93795L3.06847 1.65118C3.9568 0.762856 5.42054 0.786338 6.33784 1.70363L8.33092 3.69672C9.24822 4.61401 9.2717 6.07776 8.38337 6.96609L8.10699 7.24247C7.62737 7.72209 7.58045 8.49581 8.0261 9.03587C8.45597 9.55679 8.9194 10.0756 9.42188 10.5781C9.92435 11.0806 10.4432 11.544 10.9641 11.9739C11.5042 12.4196 12.2779 12.3726 12.7575 11.893L13.0339 11.6166C13.9222 10.7283 15.386 10.7518 16.3033 11.6691L18.2964 13.6622C19.2137 14.5795 19.2371 16.0432 18.3488 16.9315L17.0621 18.2183Z"
-                                                    fill="#45B649"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <a href="tel:+15193726595" class="text-sm font-bold hover:text-secondary sm:text-lg">+1 519 372 6595</a>
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <div>
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M0 7.34884C0 4.39476 2.39476 2 5.34884 2H14.6512C17.6052 2 20 4.39476 20 7.34884V12.9302C20 15.8843 17.6052 18.2791 14.6512 18.2791H5.34884C2.39476 18.2791 0 15.8843 0 12.9302V7.34884ZM4.8686 6.74884C4.53723 6.50031 4.06713 6.56747 3.8186 6.89884C3.57008 7.23021 3.63723 7.70031 3.9686 7.94884L8.35 11.2349C9.32778 11.9682 10.6722 11.9682 11.65 11.2349L16.0314 7.94884C16.3628 7.70031 16.4299 7.23021 16.1814 6.89884C15.9329 6.56747 15.4628 6.50031 15.1314 6.74884L10.75 10.0349C10.3056 10.3682 9.69444 10.3682 9.25 10.0349L4.8686 6.74884Z"
-                                                    fill="#FF709D"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <a href="mailto:info@plurk.com" class="text-sm font-bold hover:text-secondary sm:text-lg">info@plurk.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="mt-10 rounded-[32px] bg-white dark:bg-gray-dark md:grid md:grid-cols-2 lg:mt-0">
-                            <img
-                                :src="Loadimage('ofc.png')"
-                                alt="office"
-                                class="h-full w-full rounded-r-[32px] rounded-l-[32px] object-cover md:rounded-r-none"
-                            />
-                            <div class="py-10 px-5 sm:px-8">
-                                <div>
-                                    <svg width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_267_1200)">
-                                            <path
-                                                d="M0 0H10L10.4125 0.4125H29.5875L30 0H40V20H30L29.5875 19.5875H10.4125L10 20H0V0Z"
-                                                fill="#FF0000"
-                                            />
-                                            <path
-                                                d="M10 0H30V20H10V0ZM20.375 18.4583L20.1875 14.8625C20.1848 14.8034 20.1953 14.7444 20.2184 14.6899C20.2415 14.6354 20.2766 14.5867 20.3209 14.5475C20.3653 14.5084 20.4179 14.4796 20.4749 14.4635C20.5318 14.4473 20.5917 14.4441 20.65 14.4542L24.2292 15.0833L23.7458 13.75C23.7262 13.6969 23.7237 13.6391 23.7387 13.5845C23.7536 13.53 23.7853 13.4815 23.8292 13.4458L27.75 10.2708L26.8667 9.85833C26.807 9.83014 26.7597 9.78114 26.7336 9.72053C26.7075 9.65992 26.7045 9.59187 26.725 9.52917L27.5 7.14583L25.2417 7.625C25.1805 7.63776 25.1168 7.62896 25.0613 7.6001C25.0059 7.57124 24.9621 7.5241 24.9375 7.46667L24.5 6.4375L22.7375 8.32917C22.6972 8.37167 22.6442 8.39997 22.5865 8.40981C22.5287 8.41965 22.4693 8.41051 22.4172 8.38375C22.3651 8.357 22.3231 8.31407 22.2975 8.26141C22.2718 8.20874 22.2639 8.14919 22.275 8.09167L23.125 3.70833L21.7625 4.49583C21.7305 4.51458 21.695 4.52656 21.6582 4.53103C21.6214 4.5355 21.5841 4.53237 21.5485 4.52182C21.513 4.51127 21.48 4.49354 21.4516 4.46972C21.4231 4.4459 21.3999 4.41649 21.3833 4.38333L20 1.66667L18.6167 4.38333C18.6001 4.41649 18.5769 4.4459 18.5484 4.46972C18.52 4.49354 18.487 4.51127 18.4515 4.52182C18.4159 4.53237 18.3786 4.5355 18.3418 4.53103C18.305 4.52656 18.2695 4.51458 18.2375 4.49583L16.875 3.70833L17.725 8.09167C17.7361 8.14919 17.7282 8.20874 17.7025 8.26141C17.6769 8.31407 17.6349 8.357 17.5828 8.38375C17.5307 8.41051 17.4713 8.41965 17.4135 8.40981C17.3558 8.39997 17.3028 8.37167 17.2625 8.32917L15.5 6.4375L15.0625 7.46667C15.0379 7.5241 14.9941 7.57124 14.9387 7.6001C14.8832 7.62896 14.8195 7.63776 14.7583 7.625L12.5 7.14583L13.275 9.52917C13.2955 9.59187 13.2925 9.65992 13.2664 9.72053C13.2403 9.78114 13.193 9.83014 13.1333 9.85833L12.25 10.2708L16.1708 13.4458C16.2147 13.4815 16.2464 13.53 16.2613 13.5845C16.2763 13.6391 16.2738 13.6969 16.2542 13.75L15.7708 15.0833L19.35 14.4542C19.4083 14.4441 19.4682 14.4473 19.5251 14.4635C19.5821 14.4796 19.6347 14.5084 19.6791 14.5475C19.7234 14.5867 19.7585 14.6354 19.7816 14.6899C19.8047 14.7444 19.8152 14.8034 19.8125 14.8625L19.625 18.4583H20.375Z"
-                                                fill="white"
-                                            />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_267_1200">
-                                                <rect width="40" height="20" rx="2" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <ul class="space-y-4 pt-10">
-                                    <li class="flex gap-3">
-                                        <div class="pt-1">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M1 8.45529C1 3.77836 4.8292 0 9.53659 0C14.244 0 18.0732 3.77836 18.0732 8.45529C18.0732 11.3641 16.3769 14.235 14.5791 16.3248C13.6693 17.3823 12.7037 18.2751 11.852 18.9101C11.4268 19.227 11.0181 19.4886 10.6492 19.6744C10.3034 19.8485 9.90853 20 9.53659 20C9.16464 20 8.76974 19.8485 8.42394 19.6744C8.05506 19.4886 7.6464 19.227 7.22121 18.9101C6.36948 18.2751 5.40386 17.3823 4.49409 16.3248C2.69631 14.235 1 11.3641 1 8.45529ZM9.53661 10.9748C7.92017 10.9748 6.60978 9.66437 6.60978 8.04792C6.60978 6.43148 7.92017 5.12109 9.53661 5.12109C11.1531 5.12109 12.4634 6.43148 12.4634 8.04792C12.4634 9.66437 11.1531 10.9748 9.53661 10.9748Z"
-                                                    fill="#FFBD11"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div class="text-sm font-bold sm:text-lg">151 Yonge Street, 11th Floor, Toronto, Ontario, Canada</div>
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <div>
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17.0621 18.2183C15.1077 20.1726 10.1028 18.3363 5.88327 14.1167C1.66372 9.89718 -0.172609 4.89227 1.7817 2.93795L3.06847 1.65118C3.9568 0.762856 5.42054 0.786338 6.33784 1.70363L8.33092 3.69672C9.24822 4.61401 9.2717 6.07776 8.38337 6.96609L8.10699 7.24247C7.62737 7.72209 7.58045 8.49581 8.0261 9.03587C8.45597 9.55679 8.9194 10.0756 9.42188 10.5781C9.92435 11.0806 10.4432 11.544 10.9641 11.9739C11.5042 12.4196 12.2779 12.3726 12.7575 11.893L13.0339 11.6166C13.9222 10.7283 15.386 10.7518 16.3033 11.6691L18.2964 13.6622C19.2137 14.5795 19.2371 16.0432 18.3488 16.9315L17.0621 18.2183Z"
-                                                    fill="#45B649"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <a href="tel:+15193726595" class="text-sm font-bold hover:text-secondary sm:text-lg">+1 519 372 6595</a>
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <div>
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M0 7.34884C0 4.39476 2.39476 2 5.34884 2H14.6512C17.6052 2 20 4.39476 20 7.34884V12.9302C20 15.8843 17.6052 18.2791 14.6512 18.2791H5.34884C2.39476 18.2791 0 15.8843 0 12.9302V7.34884ZM4.8686 6.74884C4.53723 6.50031 4.06713 6.56747 3.8186 6.89884C3.57008 7.23021 3.63723 7.70031 3.9686 7.94884L8.35 11.2349C9.32778 11.9682 10.6722 11.9682 11.65 11.2349L16.0314 7.94884C16.3628 7.70031 16.4299 7.23021 16.1814 6.89884C15.9329 6.56747 15.4628 6.50031 15.1314 6.74884L10.75 10.0349C10.3056 10.3682 9.69444 10.3682 9.25 10.0349L4.8686 6.74884Z"
-                                                    fill="#FF709D"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <a href="mailto:info@plurk.com" class="text-sm font-bold hover:text-secondary sm:text-lg">info@plurk.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </template>
 <script>
-import Breadcrumb from '../includes/frontend/breadcrumb.vue'
 export default {
-    name:'contact',
+    name:'login',
     components:{
-        Breadcrumb
     },
     data(){
         return{
+            messageform: new Form({
+                first_name:'',
+                last_name:'',
+                phone:'',
+                email:'',
+                message:'',
+                roles:['Client'],
+                permissions:['View', 'Create', 'Delete'],
+                fullpage:false,
+                status:'email',//default login with
+                createurl:'api/message',
+            }),
         };
     },
-    mounted() {
-
+    mounted(){
+        this.resetForm();
     },
     computed:{
-        Company(){
-            return this.$store.getters.Company
-        },
     },
     methods:{
-         OpenSocialpage(url){
-            window.open(url, "_blank");
+        addMessage(){
+            let loader = this.Loading();
+            this.$store.dispatch('addFrontMessage', this.messageform)
+            .then((response)=>{
+                console.log('response34', response);
+                loader.hide();
+                this.resetForm();
+                toast.fire({
+                  icon: 'success',
+                  title: "Message Sent Successfuly",
+                  message: "login to veiw more"
+                });
+                this.routeresolving();
+            })
+             .catch((error)=>{
+                console.log('error', error);
+                loader.hide();
+                this.Error(error);
+            })
         },
-        Loadimage(photo) {
-          if (photo) {
-            return "/assets/themes/plurk/assets/images/" + photo;
-            // return "/assets/img/" + photo;
-          } else {
-            return "/assets/img/empty.png";
-          }
+        routeresolving(){
+            // console.log(this.$dashboard(), 'url')
+                // window.location.replace(this.$dashboard().redirecturl);
+        },
+        resetForm(){
+            this.messageform.first_name = '';
+            this.messageform.last_name  = '';
+            this.messageform.phone      = '';
+            this.messageform.email      = '';
+            this.messageform.message    = '';
+            this.messageform.rememberme = null;
+            this.messageform.fullpage   = false;
+        },
+    },
+    watch: {
+        $route(to, from) {
         },
     }
 }

@@ -1,29 +1,14 @@
 <template>
     <Banner/>
-    <!-- <Impactproducts/> -->
-    <!-- <Companyfacts/> -->
-    <!-- <Partteam/> -->
-    <!-- <Pricingplan/> -->
-    <!-- <Parttestimonials/> -->
     <Actioncall/>
 </template>
 <script>
 import Banner from './home/banner.vue';
-import Impactproducts from './home/impactproducts.vue';
-import Companyfacts from './home/companyfacts.vue';
-import Partteam from './home/partteam.vue';
-import Pricingplan from './home/pricingplan.vue';
-import Parttestimonials from './home/parttestimonials.vue';
 import Actioncall from './home/actioncall.vue';
 export default {
     name:'homebanner',
     components:{
         Banner,
-        Impactproducts,
-        Companyfacts,
-        Partteam,
-        Pricingplan,
-        Parttestimonials,
         Actioncall,
     },
     data(){

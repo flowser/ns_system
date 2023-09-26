@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\SendNotificationEvent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Events\SendMessageNotification;
+use App\Events\SendMidnightNotification;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Listeners\SendNewUserNotification;
 use App\Listeners\SendNewUserRegistration;
+use App\Listeners\SendNotificationEventListener;
 use App\Listeners\SendPasswordResetNotification;
+use App\Listeners\SendMessageNotificationListener;
+use App\Listeners\SendMidnightNotificationListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -26,7 +32,16 @@ class EventServiceProvider extends ServiceProvider
         ],
         PasswordReset::class => [
             SendPasswordResetNotification::class,
-        ]
+        ],
+        SendMessageNotification::class => [
+            SendMessageNotificationListener::class,
+        ],
+        SendMidnightNotification::class => [
+            SendMidnightNotificationListener::class,
+        ],
+        SendNotificationEvent::class => [
+            SendNotificationEventListener::class,
+        ],
     ];
 
     /**

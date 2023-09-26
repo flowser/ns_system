@@ -13,6 +13,14 @@ class UserController extends Controller
     public function __construct(UserRepositoryInterface $userRepository) {
         $this->userRepository = $userRepository;
     }
+    public function fetch()
+    {    if (auth('api')->user()) {
+            $users = User::where('id', '!=', auth('api')->user()->id)->get();
+            return response()->json([
+                'users' => $users,
+            ], 200);
+        }
+    }
     public function users($role)
     {    if (auth('api')->user()) {
             $users = User::with('roles', 'permissions')

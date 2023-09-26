@@ -25,7 +25,6 @@
             };
         },
         mounted() {
-
         },
         computed:{
             Company(){

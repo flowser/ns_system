@@ -26,75 +26,44 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          <span class="badge badge-danger navbar-badge">{{ Messages.length }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
+          <a href="#" class="dropdown-item" v-for="message in Messages" :key="message.id">
             <!-- Message Start -->
-            <div class="media">
+            <div class="media" >
               <img src="/assets/themes/adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Brad Diesel
+                  {{message.recipient.full_name }}
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                <p class="text-sm"><text-clamp :text='message.message' :max-lines='1'  container-width='240px' style="width:240px" /></p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> <timeago :datetime="message.created_at"/> /></p>
               </div>
+              <div class="dropdown-divider"></div>
             </div>
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/assets/themes/adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/assets/themes/adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          <router-link :to="{name: 'Messages'}" class="dropdown-item dropdown-footer">See All Messages</router-link>
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge">{{ Notifications.length }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">{{Notifications.length}} Notifications</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
+          <router-link :to="{name: 'Notifications'}" class="dropdown-item" v-for="notification in Notifications" :key="notification">
+            <i class="fas fa-envelope mr-2"></i> {{ Notifications.length }} new
+            <span class="float-right text-muted text-sm" v-if="notification"><timeago :datetime="notification.created_at"/></span>
+          </router-link>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <!-- <a href="#" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> 8 friend requests
             <span class="float-right text-muted text-sm">12 hours</span>
           </a>
@@ -102,9 +71,9 @@
           <a href="#" class="dropdown-item">
             <i class="fas fa-file mr-2"></i> 3 new reports
             <span class="float-right text-muted text-sm">2 days</span>
-          </a>
+          </a> -->
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <router-link :to="{name: 'Notifications'}" class="dropdown-item dropdown-footer">See All Notifications</router-link>
         </div>
       </li>
       <li class="nav-item">
@@ -131,18 +100,31 @@
         },
         data(){
             return{
+                fetchurl:  '/api/messages/fetch/' ,
+                notificationfetchurl:  '/api/notifications/fetch/' ,
             };
         },
         mounted() {
 
+             this.loadmessages();
+              this.loadnotifications();
         },
         computed:{
-            Company(){
-                // return this.$store.getters.Company
+            Notifications(){
+            return this.$store.getters.Notifications
+        },
+            Messages(){
+                return this.$store.getters.Messages
             },
         },
         methods:{
-            logout() {
+            loadmessages(){
+                return this.$store.dispatch("Messages", this.fetchurl);
+            },
+            loadnotifications(){
+            return this.$store.dispatch("Notifications", this.notificationfetchurl);
+        },
+            logout(){
                 console.log(this.$authcheck(), 'this.$authcheck()')
               if (this.$authcheck()) {
                 this.$store.dispatch("logout")

@@ -35,6 +35,11 @@ import "vue-toastification/dist/index.css";
 import ToastPlugin from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
+import DateFormat from '@voidsolutions/vue-dateformat';
+import timeago from 'vue-timeago3'
+import TextClamp from 'vue3-text-clamp';
+
+
 
 
 
@@ -85,6 +90,7 @@ const toast = Swal.mixin({
  };
 
 app.component('QuillEditor', QuillEditor);
+app.component('QuillEditor', QuillEditor);
 app.component('guestmaster', FrontendComponent);
 app.component('authmaster', BackendComponent);
 
@@ -107,9 +113,17 @@ window.toast = toast;
 
 
 
-
+// define options
+const timeagoOptions = {
+    converterOptions: {
+        includeSeconds: false,
+    }
+  };
 
 // app.use(intasend);
+app.use(timeago, timeagoOptions);
+app.use(TextClamp);
+app.use(DateFormat);
 app.use(LoadScript);
 app.use(Toast, options);
 app.use(veProgress);
